@@ -6,13 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'dark-blue': '#1B263B',
-        'darker-blue': '#0A0B0E',
-        'deep-dark': '#0A0B0E',
-        'dark-bg': '#1A1F2C',
-        'accent': '#2563EB',
-        'neon-green': '#10B981',
-        'neon-pink': '#EC4899',
+        // 宇宙深層パレット（パターン1）
+        'dark-bg': '#0A0B0E',       // 深い黒に近い青色（プライマリ背景）
+        'dark-bg-2': '#1A1F2C',     // ダークブルーグレー（セカンダリ背景）
+        'neon-blue': '#2563EB',     // 電気的な青色（メインアクセント）
+        'neon-green': '#10B981',    // ネオン緑（サブアクセント1）
+        'neon-pink': '#EC4899',     // ネオンピンク（サブアクセント2）
+        'text-primary': '#F9FAFB',  // オフホワイト（プライマリテキスト）
+        'text-secondary': '#94A3B8', // ライトグレー（セカンダリテキスト）
       },
       fontFamily: {
         'serif': ['"Noto Serif JP"', 'serif'],

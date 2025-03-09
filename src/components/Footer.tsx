@@ -5,14 +5,14 @@ import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-bg/90 backdrop-blur-md border-t border-accent/10 pt-12 pb-6">
+    <footer className="bg-dark-bg/90 backdrop-blur-md border-t border-neon-blue/10 pt-12 pb-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
             <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-blue">
               GC Studio
             </h3>
-            <p className="text-white/80 mb-4">
+            <p className="text-text-primary/80 mb-4">
               障害を持つクリエイターとして、テクノロジーと創造性を融合させたプロジェクトを展開しています。
             </p>
             <div className="flex space-x-4 mt-4">
@@ -20,7 +20,7 @@ export default function Footer() {
                 href="https://twitter.com/GshinSuzuki" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-accent transition-colors duration-300"
+                className="text-text-secondary hover:text-neon-blue transition-colors duration-300"
                 aria-label="X (Twitter)"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -31,7 +31,7 @@ export default function Footer() {
                 href="https://www.instagram.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-neon-pink transition-colors duration-300"
+                className="text-text-secondary hover:text-neon-pink transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -45,27 +45,27 @@ export default function Footer() {
             <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-green">リンク</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <Link href="/" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   ホーム
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <Link href="/about" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   鈴木我信について
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <Link href="/services" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   事業内容
                 </Link>
               </li>
               <li>
-                <Link href="/news" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <Link href="/news" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   ニュース
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <Link href="/contact" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   お問い合わせ
                 </Link>
               </li>
@@ -76,22 +76,22 @@ export default function Footer() {
             <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-pink">プロジェクト</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <a href="#" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   宇宙映像制作
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-neon-green transition-colors duration-300">
+                <a href="#" className="text-text-primary/80 hover:text-neon-green transition-colors duration-300">
                   VisionSim
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-neon-pink transition-colors duration-300">
+                <a href="#" className="text-text-primary/80 hover:text-neon-pink transition-colors duration-300">
                   VisionAssist ALT
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <a href="#" className="text-text-primary/80 hover:text-neon-blue transition-colors duration-300">
                   Prot-News
                 </a>
               </li>
@@ -100,7 +100,7 @@ export default function Footer() {
         </div>
         
         <motion.div 
-          className="text-center text-white/60 text-sm border-t border-accent/10 pt-6"
+          className="text-center text-text-secondary text-sm border-t border-neon-blue/10 pt-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

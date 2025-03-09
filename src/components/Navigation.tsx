@@ -30,7 +30,7 @@ export default function Navigation() {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled || isOpen ? 'bg-deep-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      scrolled || isOpen ? 'bg-dark-bg/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-xl md:text-2xl font-serif font-bold tracking-wider flex items-center gap-3">
@@ -41,7 +41,7 @@ export default function Navigation() {
             height={40}
             className="rounded-full"
           />
-          <span className="text-white hover:text-accent transition-colors duration-300">GC Studio<span className="hidden sm:inline"></span></span>
+          <span className="text-text-primary hover:text-neon-blue transition-colors duration-300">GC Studio<span className="hidden sm:inline"></span></span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -51,7 +51,7 @@ export default function Navigation() {
               <li key={item.name}>
                 <Link 
                   href={item.href} 
-                  className="text-white hover:text-accent relative py-2 transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-accent after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300"
+                  className="text-text-primary hover:text-neon-blue relative py-2 transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-neon-blue after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300"
                 >
                   {item.name}
                 </Link>
@@ -68,13 +68,13 @@ export default function Navigation() {
         >
           <div className="w-6 flex flex-col items-end justify-center gap-1.5 relative">
             <motion.span 
-              className="block h-0.5 bg-accent rounded-full"
+              className="block h-0.5 bg-neon-blue rounded-full"
               initial={{ width: '100%' }}
               animate={{ width: isOpen ? '100%' : '100%', rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
               transition={{ duration: 0.3 }}
             />
             <motion.span 
-              className="block h-0.5 bg-accent rounded-full"
+              className="block h-0.5 bg-neon-blue rounded-full"
               initial={{ width: '70%' }}
               animate={{ 
                 width: isOpen ? '100%' : '70%', 
@@ -84,7 +84,7 @@ export default function Navigation() {
               transition={{ duration: 0.3 }}
             />
             <motion.span 
-              className="block h-0.5 bg-accent rounded-full"
+              className="block h-0.5 bg-neon-blue rounded-full"
               initial={{ width: '50%' }}
               animate={{ width: isOpen ? '100%' : '50%', rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
               transition={{ duration: 0.3 }}
@@ -97,7 +97,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.nav 
-            className="md:hidden bg-dark-bg/80 backdrop-blur-md absolute w-full py-6 border-t border-accent/20"
+            className="md:hidden bg-dark-bg/80 backdrop-blur-md absolute w-full py-6 border-t border-neon-blue/20"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -127,7 +127,7 @@ export default function Navigation() {
                 >
                   <Link 
                     href={item.href} 
-                    className="text-xl text-white hover:text-accent block py-2 border-b border-accent/10 transition-colors duration-300"
+                    className="text-xl text-text-primary hover:text-neon-blue block py-2 border-b border-neon-blue/10 transition-colors duration-300"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}

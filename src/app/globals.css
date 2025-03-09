@@ -5,133 +5,129 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600;700;900&display=swap');
 
 :root {
-  --background-color: #0A0B0E;
-  --secondary-bg-color: #1A1F2C;
-  --text-color: #E5E7EB;
-  --accent-color: #2563EB;
-  --accent-green: #10B981;
-  --accent-pink: #EC4899;
+  /* 宇宙深層パレット（パターン1） */
+  --dark-bg: #0A0B0E;        /* 深い黒に近い青色（プライマリ背景） */
+  --dark-bg-2: #1A1F2C;      /* ダークブルーグレー（セカンダリ背景） */
+  --neon-blue: #2563EB;      /* 電気的な青色（メインアクセント） */
+  --neon-green: #10B981;     /* ネオン緑（サブアクセント1） */
+  --neon-pink: #EC4899;      /* ネオンピンク（サブアクセント2） */
+  --text-primary: #F9FAFB;   /* オフホワイト（プライマリテキスト） */
+  --text-secondary: #94A3B8; /* ライトグレー（セカンダリテキスト） */
 }
 
 body {
-  color: var(--text-color);
-  background: linear-gradient(to bottom, var(--background-color), var(--secondary-bg-color));
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--dark-bg), var(--dark-bg-2) 50%, var(--dark-bg) 100%);
+  background-size: 200% 200%;
+  animation: gradientAnimation 15s ease infinite;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
 }
 
+/* グラデーションアニメーション */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 既存のスタイル */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-  letter-spacing: 0.025em;
 }
 
 .glass-morphism {
-  background: rgba(26, 31, 44, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(26, 31, 44, 0.7);
   border: 1px solid rgba(37, 99, 235, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(10, 11, 14, 0.37);
+  transition: all 0.3s ease;
 }
 
 .noise-bg {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
+  position: relative;
 }
 
-/* スムーズスクロール */
 html {
   scroll-behavior: smooth;
 }
 
-/* 既存のスタイル */
-body {
-  @apply bg-gradient-to-b from-dark-blue to-darker-blue text-white min-h-screen;
-}
-
-/* ノイズ効果 */
-.noise-bg {
+.noise-bg::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
-  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
   z-index: 1;
-}
-
-/* グラスモーフィズム効果 */
-.glass-morphism {
-  background: rgba(26, 31, 44, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .glass-morphism:hover {
-  border-color: #2563EB;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+  background-color: rgba(26, 31, 44, 0.8);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  transform: translateY(-2px);
 }
 
-/* カード要素 */
 .card {
-  background: rgba(26, 31, 44, 0.5);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  @apply bg-dark-bg/80 rounded-lg p-6 shadow-lg border border-neon-blue/10 backdrop-blur-md transition-all duration-300 relative overflow-hidden;
 }
 
 .card:hover {
-  border-color: #2563EB;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+  @apply border-neon-blue/20 shadow-xl transform -translate-y-1;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
 }
 
-/* ボタンスタイル */
 .btn-primary {
-  @apply bg-accent text-white px-4 py-2 rounded transition-all duration-300;
+  @apply bg-neon-blue hover:bg-neon-blue/90 text-white font-medium py-2 px-4 rounded-md transition-all duration-300;
 }
 
 .btn-primary:hover {
-  @apply bg-blue-700 shadow-glow-blue;
+  @apply shadow-lg shadow-neon-blue/20 transform -translate-y-0.5;
 }
 
 .btn-secondary {
-  @apply bg-neon-green text-white px-4 py-2 rounded transition-all duration-300;
+  @apply bg-dark-bg-2 hover:bg-dark-bg-2/90 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 border border-neon-blue/20;
 }
 
 .btn-secondary:hover {
-  @apply bg-green-700 shadow-glow-green;
+  @apply shadow-lg shadow-neon-blue/10 transform -translate-y-0.5 border-neon-blue/30;
 }
 
 .btn-accent {
-  @apply bg-neon-pink text-white px-4 py-2 rounded transition-all duration-300;
+  @apply bg-neon-pink hover:bg-neon-pink/90 text-white font-medium py-2 px-4 rounded-md transition-all duration-300;
 }
 
 .btn-accent:hover {
-  @apply bg-pink-700 shadow-glow-pink;
+  @apply shadow-lg shadow-neon-pink/20 transform -translate-y-0.5;
 }
 
-/* ネオンテキスト効果 */
+/* ネオンテキストエフェクト */
 .neon-text-blue {
-  color: #2563EB;
-  text-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px rgba(37, 99, 235, 0.5), 0 0 10px rgba(37, 99, 235, 0.3);
 }
 
 .neon-text-green {
-  color: #10B981;
-  text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+  color: var(--neon-green);
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.5), 0 0 10px rgba(16, 185, 129, 0.3);
 }
 
 .neon-text-pink {
-  color: #EC4899;
-  text-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.3);
 }
 
-/* 星空アニメーション背景 - 色を更新 */
+/* 背景星アニメーション */
 .bg-stars-animation {
-  background: linear-gradient(125deg, #0A0B0E 0%, #1A1F2C 50%, #0F172A 100%);
   position: relative;
   overflow: hidden;
 }
@@ -143,20 +139,25 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 200%;
+  height: 200%;
   background-image: 
-    radial-gradient(#2563EB, rgba(37, 99, 235, 0.2) 2px, transparent 3px),
-    radial-gradient(#10B981, rgba(16, 185, 129, 0.15) 1px, transparent 2px),
-    radial-gradient(#EC4899, rgba(236, 72, 153, 0.1) 2px, transparent 3px);
-  background-size: 550px 550px, 350px 350px, 250px 250px;
-  background-position: 0 0, 40px 60px, 130px 270px;
-  animation: starsAnimation 120s linear infinite;
+    radial-gradient(1px 1px at 25% 25%, white 1px, transparent 0),
+    radial-gradient(1px 1px at 50% 50%, white 1px, transparent 0),
+    radial-gradient(2px 2px at 75% 75%, white 1px, transparent 0),
+    radial-gradient(1px 1px at 10% 90%, white 1px, transparent 0);
+  background-size: 200px 200px;
+  background-position: 0 0;
+  opacity: 0.15;
+  animation: starsAnimation 100s linear infinite;
+  z-index: -1;
 }
 
 @keyframes starsAnimation {
   0% {
-    background-position: 0 0, 40px 60px, 130px 270px;
+    transform: translateY(0) translateX(0) rotate(0);
   }
   100% {
-    background-position: 550px 550px, 390px 410px, 380px 520px;
+    transform: translateY(-50%) translateX(-50%) rotate(180deg);
   }
 } 

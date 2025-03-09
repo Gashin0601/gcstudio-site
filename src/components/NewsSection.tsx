@@ -14,13 +14,12 @@ export default function NewsSection() {
     const fetchNews = async () => {
       try {
         setIsLoading(true);
-        // APIキーが設定されていない場合はエラーを表示
-        if (!process.env.MICROCMS_API_KEY) {
-          setError('MicroCMS APIキーが設定されていません。');
-          setIsLoading(false);
-          return;
-        }
+        console.log('クライアントサイドの環境変数確認:', {
+          'NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN': process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN || '未設定',
+          'NEXT_PUBLIC_MICROCMS_API_KEY': process.env.NEXT_PUBLIC_MICROCMS_API_KEY ? '設定済み' : '未設定'
+        });
         
+        // APIキーのチェックをスキップ（ライブラリ側でチェックされるため）
         const response = await client.get({
           endpoint: 'news',
           queries: { limit: 4 }

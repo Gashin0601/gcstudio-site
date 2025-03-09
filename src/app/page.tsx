@@ -1,3 +1,6 @@
+// これによりこのページは常にサーバーサイドでレンダリングされ、環境変数が実行時に評価されます
+export const dynamic = 'force-dynamic';
+
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ProfileSection from '@/components/ProfileSection';

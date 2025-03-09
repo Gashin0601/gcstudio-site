@@ -22,15 +22,18 @@ export default function HeroSection() {
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-dark-blue via-accent/20 to-dark-blue/90"></div>
+          <div className="w-full h-full bg-gradient-to-br from-deep-dark via-dark-bg to-darker-blue"></div>
         )}
-        <div className="absolute inset-0 bg-dark-blue/50 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-deep-dark/60 backdrop-blur-sm"></div>
       </div>
+      
+      {/* ノイズエフェクト */}
+      <div className="absolute inset-0 z-1 opacity-20 noise-bg"></div>
       
       {/* コンテンツ */}
       <div className="container relative z-10 px-4 text-center">
         <motion.h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white tracking-wider"
+          className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white tracking-wider neon-text-blue"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
@@ -51,7 +54,7 @@ export default function HeroSection() {
             ease: [0.04, 0.62, 0.23, 0.98]
           }}
         >
-          障害を乗り越え、<span className="text-white font-normal">宇宙・VR・テクノロジー</span>を探求する<br className="hidden md:block" />
+          障害を乗り越え、<span className="neon-text-green font-normal">宇宙・VR・テクノロジー</span>を探求する<br className="hidden md:block" />
           クリエイティブスタジオ
         </motion.p>
 
@@ -67,7 +70,7 @@ export default function HeroSection() {
         >
           <a 
             href="#about" 
-            className="px-8 py-3 bg-accent/80 hover:bg-accent text-white backdrop-blur-md rounded-2xl shadow-xl inline-block transition-all duration-300 hover:scale-105"
+            className="px-8 py-3 bg-accent hover:bg-blue-600 text-white rounded-2xl shadow-xl inline-block transition-all duration-300 hover:scale-105 hover:shadow-glow-blue"
           >
             詳細を見る
           </a>
@@ -88,7 +91,7 @@ export default function HeroSection() {
           }}
         >
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 5L12 19M12 19L19 12M12 19L5 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 5L12 19M12 19L19 12M12 19L5 12" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </motion.div>
       </div>

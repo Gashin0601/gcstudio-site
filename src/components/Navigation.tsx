@@ -30,7 +30,7 @@ export default function Navigation() {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled || isOpen ? 'bg-dark-blue/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      scrolled || isOpen ? 'bg-deep-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-xl md:text-2xl font-serif font-bold tracking-wider flex items-center gap-3">
@@ -68,13 +68,13 @@ export default function Navigation() {
         >
           <div className="w-6 flex flex-col items-end justify-center gap-1.5 relative">
             <motion.span 
-              className="block h-0.5 bg-white rounded-full"
+              className="block h-0.5 bg-accent rounded-full"
               initial={{ width: '100%' }}
               animate={{ width: isOpen ? '100%' : '100%', rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
               transition={{ duration: 0.3 }}
             />
             <motion.span 
-              className="block h-0.5 bg-white rounded-full"
+              className="block h-0.5 bg-accent rounded-full"
               initial={{ width: '70%' }}
               animate={{ 
                 width: isOpen ? '100%' : '70%', 
@@ -84,7 +84,7 @@ export default function Navigation() {
               transition={{ duration: 0.3 }}
             />
             <motion.span 
-              className="block h-0.5 bg-white rounded-full"
+              className="block h-0.5 bg-accent rounded-full"
               initial={{ width: '50%' }}
               animate={{ width: isOpen ? '100%' : '50%', rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
               transition={{ duration: 0.3 }}
@@ -97,7 +97,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.nav 
-            className="md:hidden glass-morphism absolute w-full py-6"
+            className="md:hidden bg-dark-bg/80 backdrop-blur-md absolute w-full py-6 border-t border-accent/20"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -127,7 +127,7 @@ export default function Navigation() {
                 >
                   <Link 
                     href={item.href} 
-                    className="text-xl text-white hover:text-accent block py-2 border-b border-white/10 transition-colors duration-300"
+                    className="text-xl text-white hover:text-accent block py-2 border-b border-accent/10 transition-colors duration-300"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}

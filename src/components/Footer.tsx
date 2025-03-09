@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-blue/80 backdrop-blur-md border-t border-white/10 pt-12 pb-6">
+    <footer className="bg-dark-bg/90 backdrop-blur-md border-t border-accent/10 pt-12 pb-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
-            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide">
-              鈴木我信クリエイションズスタジオ
+            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-blue">
+              GC Studio
             </h3>
             <p className="text-white/80 mb-4">
               障害を持つクリエイターとして、テクノロジーと創造性を融合させたプロジェクトを展開しています。
@@ -20,7 +20,7 @@ export default function Footer() {
                 href="https://twitter.com/GshinSuzuki" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-accent transition-colors duration-300"
+                className="text-white/70 hover:text-accent transition-colors duration-300"
                 aria-label="X (Twitter)"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -31,7 +31,7 @@ export default function Footer() {
                 href="https://www.instagram.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-accent transition-colors duration-300"
+                className="text-white/70 hover:text-neon-pink transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide">リンク</h3>
+            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-green">リンク</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-white/80 hover:text-accent transition-colors duration-300">
@@ -73,7 +73,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide">プロジェクト</h3>
+            <h3 className="text-xl font-serif font-bold mb-4 tracking-wide neon-text-pink">プロジェクト</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-white/80 hover:text-accent transition-colors duration-300">
@@ -81,12 +81,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <a href="#" className="text-white/80 hover:text-neon-green transition-colors duration-300">
                   VisionSim
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-accent transition-colors duration-300">
+                <a href="#" className="text-white/80 hover:text-neon-pink transition-colors duration-300">
                   VisionAssist ALT
                 </a>
               </li>
@@ -100,13 +100,13 @@ export default function Footer() {
         </div>
         
         <motion.div 
-          className="text-center text-white/60 text-sm border-t border-white/10 pt-6"
+          className="text-center text-white/60 text-sm border-t border-accent/10 pt-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <p>&copy; {new Date().getFullYear()} 鈴木我信クリエイションズスタジオ. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} GC Studio. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

@@ -5,15 +5,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600;700;900&display=swap');
 
 :root {
-  --background-color: #1B263B;
-  --text-color: #ffffff;
-  --accent-color: #4E6E81;
+  --background-color: #0A0B0E;
+  --secondary-bg-color: #1A1F2C;
+  --text-color: #E5E7EB;
+  --accent-color: #2563EB;
+  --accent-green: #10B981;
+  --accent-pink: #EC4899;
 }
 
 body {
   color: var(--text-color);
-  background-color: var(--background-color);
+  background: linear-gradient(to bottom, var(--background-color), var(--secondary-bg-color));
   font-family: 'Inter', sans-serif;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -23,10 +27,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-morphism {
-  background: rgba(78, 110, 129, 0.2);
+  background: rgba(26, 31, 44, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .noise-bg {
@@ -59,15 +63,75 @@ body {
 
 /* グラスモーフィズム効果 */
 .glass-morphism {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(26, 31, 44, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  transition: all 0.3s ease;
 }
 
-/* 星空アニメーション背景 */
+.glass-morphism:hover {
+  border-color: #2563EB;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+/* カード要素 */
+.card {
+  background: rgba(26, 31, 44, 0.5);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #2563EB;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+/* ボタンスタイル */
+.btn-primary {
+  @apply bg-accent text-white px-4 py-2 rounded transition-all duration-300;
+}
+
+.btn-primary:hover {
+  @apply bg-blue-700 shadow-glow-blue;
+}
+
+.btn-secondary {
+  @apply bg-neon-green text-white px-4 py-2 rounded transition-all duration-300;
+}
+
+.btn-secondary:hover {
+  @apply bg-green-700 shadow-glow-green;
+}
+
+.btn-accent {
+  @apply bg-neon-pink text-white px-4 py-2 rounded transition-all duration-300;
+}
+
+.btn-accent:hover {
+  @apply bg-pink-700 shadow-glow-pink;
+}
+
+/* ネオンテキスト効果 */
+.neon-text-blue {
+  color: #2563EB;
+  text-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+}
+
+.neon-text-green {
+  color: #10B981;
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+}
+
+.neon-text-pink {
+  color: #EC4899;
+  text-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+}
+
+/* 星空アニメーション背景 - 色を更新 */
 .bg-stars-animation {
-  background: linear-gradient(125deg, #020024 0%, #090979 35%, #00d4ff 100%);
+  background: linear-gradient(125deg, #0A0B0E 0%, #1A1F2C 50%, #0F172A 100%);
   position: relative;
   overflow: hidden;
 }
@@ -80,9 +144,9 @@ body {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    radial-gradient(#2563EB, rgba(37, 99, 235, 0.2) 2px, transparent 3px),
+    radial-gradient(#10B981, rgba(16, 185, 129, 0.15) 1px, transparent 2px),
+    radial-gradient(#EC4899, rgba(236, 72, 153, 0.1) 2px, transparent 3px);
   background-size: 550px 550px, 350px 350px, 250px 250px;
   background-position: 0 0, 40px 60px, 130px 270px;
   animation: starsAnimation 120s linear infinite;

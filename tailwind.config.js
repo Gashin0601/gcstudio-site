@@ -7,13 +7,13 @@ module.exports = {
     extend: {
       colors: {
         // 宇宙深層パレット（パターン1）
-        'dark-bg': '#0A0B0E',       // 深い黒に近い青色（プライマリ背景）
-        'dark-bg-2': '#1A1F2C',     // ダークブルーグレー（セカンダリ背景）
-        'neon-blue': '#2563EB',     // 電気的な青色（メインアクセント）
-        'neon-green': '#10B981',    // ネオン緑（サブアクセント1）
-        'neon-pink': '#EC4899',     // ネオンピンク（サブアクセント2）
-        'text-primary': '#F9FAFB',  // オフホワイト（プライマリテキスト）
-        'text-secondary': '#94A3B8', // ライトグレー（セカンダリテキスト）
+        'dark-bg': '#0A0E17',       // 深い黒に近い青色（プライマリ背景）
+        'dark-bg-2': '#141927',     // ダークブルーグレー（セカンダリ背景）
+        'accent': '#4A6FA5',         // 控えめなブルー（唯一のアクセント）
+        'neon-blue': '#2563EB',      // この色を追加
+        'neon-pink': '#EC4899',      // ネオンピンクを追加
+        'text-primary': '#E6E8EC',   // オフホワイト（プライマリテキスト）
+        'text-secondary': '#8D93A1', // グレー（セカンダリテキスト）
       },
       fontFamily: {
         'serif': ['"Noto Serif JP"', 'serif'],

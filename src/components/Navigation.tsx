@@ -6,13 +6,13 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { name: 'ホーム', href: '/' },
-  { name: '鈴木我信について', href: '/about' },
-  { name: '事業内容', href: '/services' },
-  { name: 'ニュース', href: '/news' },
+  { name: 'ホーム', href: '/#top' },
+  { name: '鈴木我信について', href: '/#profile' },
+  { name: '事業内容', href: '/#services' },
+  { name: 'ニュース', href: '/#news' },
   { name: 'ビジョン', href: '/#vision' },
   { name: '未来ビジョン', href: '/#future-vision' },
-  { name: 'お問い合わせ', href: '/contact' },
+  { name: 'お問い合わせ', href: '/#contact' },
 ];
 
 export default function Navigation() {
@@ -41,7 +41,7 @@ export default function Navigation() {
             height={40}
             className="rounded-full"
           />
-          <span className="text-text-primary hover:text-neon-blue transition-colors duration-300">GC Studio<span className="hidden sm:inline"></span></span>
+          <span className="text-text-primary hover:text-accent transition-colors duration-300">GC Studio</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -51,7 +51,7 @@ export default function Navigation() {
               <li key={item.name}>
                 <Link 
                   href={item.href} 
-                  className="text-text-primary hover:text-neon-blue relative py-2 transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-neon-blue after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300"
+                  className="text-text-primary hover:text-accent transition-colors duration-300"
                 >
                   {item.name}
                 </Link>
@@ -127,7 +127,7 @@ export default function Navigation() {
                 >
                   <Link 
                     href={item.href} 
-                    className="text-xl text-text-primary hover:text-neon-blue block py-2 border-b border-neon-blue/10 transition-colors duration-300"
+                    className="text-xl text-text-primary hover:text-accent transition-colors duration-300"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}

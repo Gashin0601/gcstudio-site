@@ -8,7 +8,7 @@ export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="top" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* 背景画像 */}
       <div className="absolute inset-0 z-0">
         {!imageError ? (
@@ -24,7 +24,7 @@ export default function HeroSection() {
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-dark-bg via-dark-bg-2 to-dark-bg-2"></div>
         )}
-        <div className="absolute inset-0 bg-dark-bg/60 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-dark-bg/15"></div>
       </div>
       
       {/* ノイズエフェクト */}
@@ -57,24 +57,6 @@ export default function HeroSection() {
           障害を乗り越え、<span className="neon-text-green font-normal">宇宙・VR・テクノロジー</span>を探求する<br className="hidden md:block" />
           クリエイティブスタジオ
         </motion.p>
-
-        <motion.div 
-          className="mt-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.8,
-            delay: 0.4,
-            ease: [0.04, 0.62, 0.23, 0.98]
-          }}
-        >
-          <a 
-            href="#about" 
-            className="px-8 py-3 bg-neon-blue hover:bg-blue-600 text-text-primary rounded-2xl shadow-xl inline-block transition-all duration-300 hover:scale-105 hover:shadow-glow-blue"
-          >
-            詳細を見る
-          </a>
-        </motion.div>
 
         {/* スクロールダウンアニメーション */}
         <motion.div 

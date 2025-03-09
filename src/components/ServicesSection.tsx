@@ -110,7 +110,7 @@ export default function ServicesSection() {
                 <h3 className={`text-2xl font-serif font-bold mb-4 tracking-wide ${getColorClass(service.color)}`}>
                   {service.title}
                 </h3>
-                <p className="text-white/80">
+                <p className="text-text-primary">
                   {service.description}
                 </p>
                 

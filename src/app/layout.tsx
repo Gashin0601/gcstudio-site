@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import CursorEffect from '@/components/CursorEffect';
 
 export const metadata: Metadata = {
   title: 'GC Studio | 宇宙・VR・メディア',
@@ -16,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="ja" className="scroll-smooth">
       <body>
-        <CursorEffect />
         {children}
       </body>
     </html>

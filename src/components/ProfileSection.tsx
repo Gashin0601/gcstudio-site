@@ -8,7 +8,7 @@ export default function ProfileSection() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
+    <section id="profile" className="py-20 relative overflow-hidden">
       {/* 背景テクスチャ */}
       <div className="absolute inset-0 noise-bg opacity-20"></div>
       

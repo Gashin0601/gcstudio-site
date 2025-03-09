@@ -1,6 +1,6 @@
-# Gashin Creations Studio 公式ウェブサイト
+# GC Studio 公式ウェブサイト
 
-このリポジトリは、Gashin Creations Studio の公式ウェブサイトのソースコードを管理しています。Next.js 15 と Tailwind CSS を使用して構築された、モダンでアクセシブルなウェブサイトです。
+このリポジトリは、GC Studio の公式ウェブサイトのソースコードを管理しています。Next.js 15 と Tailwind CSS を使用して構築された、モダンでアクセシブルなウェブサイトです。
 
 ## 目次
 
@@ -17,7 +17,7 @@
 
 ## 概要
 
-Gashin Creations Studio の公式ウェブサイトは、クリエイティブな活動と技術革新を融合させ、誰もが創作活動に参加できる未来を目指すプラットフォームです。視覚障害を持つクリエイター鈴木我信の経験と視点を活かし、アクセシビリティを重視したデザインと実装を特徴としています。
+GC Studio の公式ウェブサイトは、クリエイティブな活動と技術革新を融合させ、誰もが創作活動に参加できる未来を目指すプラットフォームです。視覚障害を持つクリエイター鈴木我信の経験と視点を活かし、アクセシビリティを重視したデザインと実装を特徴としています。
 
 ## 技術スタック
 
@@ -35,7 +35,18 @@ Gashin Creations Studio の公式ウェブサイトは、クリエイティブ�
 
 ## 機能
 
-- 🏠 レスポンシブなホームページ
+- 🏠 シングルページアプリケーション（SPA）構造
+
+  - 全てのセクションがホームページ内でシームレスに遷移
+  - スクロールベースのナビゲーション
+
+- 🎨 最適化された UI/UX デザイン
+
+  - 統一されたカラーパレット
+  - オーバーレイ効果の最適化
+  - コントラスト調整による可読性向上
+
+- 📱 レスポンシブなレイアウト
 
   - ヒーローセクション
   - プロフィール紹介
@@ -50,13 +61,13 @@ Gashin Creations Studio の公式ウェブサイトは、クリエイティブ�
   - カテゴリー別表示
   - 詳細ページ
 
-- 👤 プロフィールページ
+- 👤 プロフィールセクション
 
   - 経歴紹介
   - スキルセット
   - 活動実績
 
-- 🎯 ビジョンページ
+- 🎯 ビジョンセクション
   - 未来構想の詳細
   - プロジェクト計画
   - 社会貢献への思い
@@ -65,8 +76,8 @@ Gashin Creations Studio の公式ウェブサイトは、クリエイティブ�
 
 ```bash
 # リポジトリのクローン
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/Gashin0601/gcstudio-site.git
+cd gcstudio-site
 
 # 依存関係のインストール
 npm install
@@ -99,16 +110,17 @@ MICROCMS_SERVICE_DOMAIN=あなたのサービスドメイン
 │   ├── app/         # Next.jsのアプリケーションディレクトリ
 │   │   ├── page.tsx        # ホームページ
 │   │   ├── layout.tsx      # ルートレイアウト
-│   │   ├── about/         # プロフィールページ
-│   │   ├── news/          # ニュースページ
-│   │   ├── services/      # サービスページ
-│   │   ├── future-vision/ # 未来ビジョンページ
-│   │   └── contact/       # お問い合わせページ
+│   │   ├── globals.css     # グローバルスタイル
 │   ├── components/  # Reactコンポーネント
-│   │   ├── common/        # 共通コンポーネント
-│   │   └── sections/      # セクションコンポーネント
+│   │   ├── HeroSection.tsx    # ヒーローセクション
+│   │   ├── Navigation.tsx     # ナビゲーション
+│   │   ├── ProfileSection.tsx # プロフィールセクション
+│   │   ├── ServicesSection.tsx # サービスセクション
+│   │   ├── NewsSection.tsx    # ニュースセクション
+│   │   ├── VisionSection.tsx  # ビジョンセクション
+│   │   ├── Footer.tsx         # フッター
+│   │   └── common/            # 共通コンポーネント
 │   └── lib/         # ユーティリティ関数とAPIクライアント
-├── styles/          # グローバルスタイル
 ├── types/           # TypeScript型定義
 └── README.md        # このファイル
 ```
@@ -118,6 +130,12 @@ MICROCMS_SERVICE_DOMAIN=あなたのサービスドメイン
 - コンポーネントは機能単位で分割し、再利用可能な形で実装
 - TypeScript の型定義を適切に行い、型安全性を確保
 - アクセシビリティガイドラインに従った実装
+- 統一されたカラーパレットの使用
+  - `--dark-bg`: #0A0E17 (ダークネイビーブラック)
+  - `--dark-bg-2`: #141927 (やや明るいダークネイビー)
+  - `--accent`: #4A6FA5 (サブトルブルー)
+  - `--text-primary`: #E6E8EC (オフホワイト)
+  - `--text-secondary`: #8D93A1 (グレー)
 - レスポンシブデザインの考慮
 - パフォーマンス最適化
 
@@ -145,6 +163,6 @@ MICROCMS_SERVICE_DOMAIN=あなたのサービスドメイン
 
 - 📧 メール: contact@example.com
 - 🌐 ウェブサイト: https://example.com
-- 📱 Twitter: @example
+- 📱 Twitter: @GshinSuzuki
 
 ご質問やご提案がございましたら、お気軽にお問い合わせください。

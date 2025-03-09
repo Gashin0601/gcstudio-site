@@ -13,7 +13,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         {!imageError ? (
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/hero-bg.jpeg"
             alt="宇宙の星雲"
             fill
             className="object-cover"
@@ -38,7 +38,7 @@ export default function HeroSection() {
             ease: [0.04, 0.62, 0.23, 0.98]
           }}
         >
-          鈴木我信<span className="hidden sm:inline">クリエイションズスタジオ</span>
+          GC Studio
         </motion.h1>
         
         <motion.p 

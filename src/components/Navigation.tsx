@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -32,8 +33,15 @@ export default function Navigation() {
       scrolled || isOpen ? 'bg-dark-blue/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-xl md:text-2xl font-serif font-bold tracking-wider">
-          <span className="text-white hover:text-accent transition-colors duration-300">鈴木我信<span className="hidden sm:inline">クリエイションズスタジオ</span></span>
+        <Link href="/" className="text-xl md:text-2xl font-serif font-bold tracking-wider flex items-center gap-3">
+          <Image 
+            src="/images/gcstudio-icon.jpeg"
+            alt="GC Studio アイコン"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span className="text-white hover:text-accent transition-colors duration-300">GC Studio<span className="hidden sm:inline"></span></span>
         </Link>
 
         {/* Desktop Navigation */}

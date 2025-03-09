@@ -9,6 +9,8 @@ const navItems = [
   { name: '鈴木我信について', href: '/about' },
   { name: '事業内容', href: '/services' },
   { name: 'ニュース', href: '/news' },
+  { name: 'ビジョン', href: '/#vision' },
+  { name: '未来ビジョン', href: '/#future-vision' },
   { name: 'お問い合わせ', href: '/contact' },
 ];
 

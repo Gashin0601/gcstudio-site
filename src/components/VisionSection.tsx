@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import DetailButton from './common/DetailButton';
 
 export default function VisionSection() {
   return (
-    <section className="py-20 relative overflow-hidden bg-dark-blue/50">
+    <section id="vision" className="py-20 relative overflow-hidden bg-dark-blue/50">
       {/* 背景テクスチャ */}
       <div className="absolute inset-0 noise-bg opacity-30"></div>
       
@@ -97,6 +98,9 @@ export default function VisionSection() {
               "障害は制限ではなく、新たな可能性の入り口である"
             </p>
           </motion.div>
+          
+          {/* 詳しく見るボタン */}
+          <DetailButton href="/future-vision" />
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ProfileSection2 from '@/components/ProfileSection2';
 import VisionSection from '@/components/VisionSection';
+import FutureVisionSection from '@/components/FutureVisionSection';
 import ServicesSection from '@/components/ServicesSection';
 import NewsSection from '@/components/NewsSection';
 import ContactSection from '@/components/ContactSection';
@@ -16,9 +17,10 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <ProfileSection2 />
-      <VisionSection />
       <ServicesSection />
       <NewsSection />
+      <VisionSection />
+      <FutureVisionSection />
       <ContactSection />
       <Footer />
     </main>

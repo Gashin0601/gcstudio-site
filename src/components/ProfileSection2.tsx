@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import DetailButton from './common/DetailButton';
 
 export default function ProfileSection2() {
   const [imageError, setImageError] = useState(false);
@@ -92,6 +93,9 @@ export default function ProfileSection2() {
                 <span className="text-white/70 text-sm">活動年数</span>
               </div>
             </div>
+            
+            {/* 詳しく見るボタン */}
+            <DetailButton href="/profile" />
           </motion.div>
         </div>
       </div>

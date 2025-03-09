@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-export default function ProfileSection() {
+export default function ProfileSection2() {
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -34,20 +33,17 @@ export default function ProfileSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="relative h-[500px] w-full md:w-[400px] mx-auto">
+            <div className="relative h-[500px] w-full md:w-[400px] mx-auto flex items-center justify-center">
               {!imageError ? (
-                <Image
+                <img
                   src="/images/gashin-profile.png"
                   alt="鈴木我信"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  priority
-                  unoptimized
-                  className="object-contain"
+                  className="max-w-full max-h-full object-contain"
+                  style={{ maxHeight: '100%', maxWidth: '100%' }}
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="w-64 h-64 rounded-full bg-accent/20 flex items-center justify-center text-6xl font-serif absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="w-64 h-64 rounded-full bg-accent/20 flex items-center justify-center text-6xl font-serif">
                   鈴木
                 </div>
               )}

@@ -15,7 +15,7 @@ const services = [
     id: 'visionsim',
     title: 'VisionSim',
     description: '様々な視覚障害の見え方をシミュレートするアプリ。健常者が視覚障害者の見え方を体験することで、相互理解とアクセシビリティの重要性を伝えます。',
-    image: '/images/visionsimvisionsim.jpg.webp',
+    image: '/images/visionsimvisionsim.jpg',
   },
   {
     id: 'visionassist',

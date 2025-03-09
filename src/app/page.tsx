@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
-import ProfileSection from '@/components/ProfileSection';
+import ProfileSection2 from '@/components/ProfileSection2';
 import VisionSection from '@/components/VisionSection';
 import ServicesSection from '@/components/ServicesSection';
 import NewsSection from '@/components/NewsSection';
@@ -15,7 +15,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <HeroSection />
-      <ProfileSection />
+      <ProfileSection2 />
       <VisionSection />
       <ServicesSection />
       <NewsSection />

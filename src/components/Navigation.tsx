@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 
 // ナビゲーション項目の定義
 const navItems = [
+  { name: 'ホーム', href: '/', icon: '🏠', homeHash: '#top' },
   { name: 'プロフィール', href: '/profile', icon: '👤', homeHash: '#profile' },
   { name: 'サービス', href: '/services', icon: '🚀', homeHash: '#services' },
   { name: 'ニュース', href: '/news', icon: '📰', homeHash: '#news' },

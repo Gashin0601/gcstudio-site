@@ -19,15 +19,16 @@ export default function NewsSection() {
           'NEXT_PUBLIC_MICROCMS_API_KEY': process.env.NEXT_PUBLIC_MICROCMS_API_KEY ? '設定済み' : '未設定'
         });
         
-        // APIキーのチェックをスキップ（ライブラリ側でチェックされるため）
+        // 記事データの取得
         const response = await client.get({
           endpoint: 'news',
-          queries: { limit: 4 }
+          queries: { limit: 3 }
         });
+        
         setNews(response.contents);
       } catch (err) {
-        console.error('ニュースの取得に失敗しました:', err);
-        setError('ニュースの取得に失敗しました。しばらくしてからお試しください。');
+        console.error('ニュース取得エラー:', err);
+        setError('ニュースの読み込みに失敗しました。');
       } finally {
         setIsLoading(false);
       }
@@ -36,18 +37,17 @@ export default function NewsSection() {
     fetchNews();
   }, []);
 
-  // 日付をフォーマットする関数
+  // 日付フォーマット
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
   };
 
   return (
-    <section id="news" className="py-20 relative overflow-hidden bg-dark-blue/30">
+    <section id="news" className="py-20 relative overflow-hidden">
       {/* 背景テクスチャ */}
       <div className="absolute inset-0 noise-bg opacity-20"></div>
       

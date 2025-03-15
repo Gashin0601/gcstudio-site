@@ -7,11 +7,11 @@ import { usePathname } from 'next/navigation';
 
 // ナビゲーション項目の定義
 const navItems = [
-  { name: 'プロフィール', href: '/profile', icon: '👤' },
-  { name: 'サービス', href: '/services', icon: '🚀' },
-  { name: 'ニュース', href: '/news', icon: '📰' },
-  { name: 'ビジョン', href: '/future-vision', icon: '🔮' },
-  { name: 'お問い合わせ', href: '/contact', icon: '✉️' },
+  { name: 'プロフィール', href: '/profile', icon: '👤', homeHash: '#profile' },
+  { name: 'サービス', href: '/services', icon: '🚀', homeHash: '#services' },
+  { name: 'ニュース', href: '/news', icon: '📰', homeHash: '#news' },
+  { name: 'ビジョン', href: '/future-vision', icon: '🔮', homeHash: '#vision' },
+  { name: 'お問い合わせ', href: '/contact', icon: '✉️', homeHash: '#contact' },
 ];
 
 // メニュースタイルの定義
@@ -27,7 +27,8 @@ const NavLink = memo(({
   onClick = () => {}, 
   isMobile = false,
   icon = null,
-  menuStyle = MENU_STYLES.FULLSCREEN
+  menuStyle = MENU_STYLES.FULLSCREEN,
+  homeHash
 }: { 
   href: string; 
   children: React.ReactNode; 
@@ -35,15 +36,20 @@ const NavLink = memo(({
   isMobile?: boolean;
   icon?: React.ReactNode | null;
   menuStyle?: string;
+  homeHash?: string;
 }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
+  const isHome = pathname === '/';
+  
+  // リンク先の決定（ホームページの場合はハッシュリンクを使用）
+  const linkHref = isHome && homeHash ? homeHash : href;
   
   // フルスクリーンメニュースタイル
   if (menuStyle === MENU_STYLES.FULLSCREEN && isMobile) {
     return (
       <Link 
-        href={href} 
+        href={linkHref} 
         className={`
           font-serif tracking-wider py-4 px-6 block w-full
           transition-all duration-500 rounded-lg relative overflow-hidden
@@ -69,7 +75,7 @@ const NavLink = memo(({
   if (menuStyle === MENU_STYLES.DRAWER && isMobile) {
     return (
       <Link 
-        href={href} 
+        href={linkHref} 
         className={`
           flex items-center gap-4 py-4 px-2 rounded-lg transition-all duration-300
           ${isActive 
@@ -89,7 +95,7 @@ const NavLink = memo(({
   // デスクトップ用リンク
   return (
     <Link 
-      href={href} 
+      href={linkHref} 
       className={`
         relative group transition-colors duration-300
         ${isActive ? 'text-accent' : 'text-white hover:text-accent'}
@@ -279,6 +285,7 @@ function Navigation() {
                 isMobile={true}
                 icon={item.icon}
                 menuStyle={MENU_STYLES.FULLSCREEN}
+                homeHash={item.homeHash}
               >
                 {item.name}
               </NavLink>
@@ -365,6 +372,7 @@ function Navigation() {
                   isMobile={true}
                   icon={item.icon}
                   menuStyle={MENU_STYLES.DRAWER}
+                  homeHash={item.homeHash}
                 >
                   {item.name}
                 </NavLink>
@@ -424,7 +432,7 @@ function Navigation() {
           <ul className="flex space-x-8">
             {navItems.map((item) => (
               <li key={item.name} className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
-                <NavLink href={item.href}>{item.name}</NavLink>
+                <NavLink href={item.href} homeHash={item.homeHash}>{item.name}</NavLink>
               </li>
             ))}
           </ul>

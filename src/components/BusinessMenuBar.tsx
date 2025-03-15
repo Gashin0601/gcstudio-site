@@ -122,7 +122,7 @@ export default function BusinessMenuBar() {
         className="fixed top-20 left-0 right-0 z-40 pointer-events-none"
       >
         <div className="container mx-auto px-4">
-          <div className="bg-dark-blue/80 backdrop-blur-md border border-accent/20 rounded-xl shadow-lg p-3 pointer-events-auto">
+          <div className="bg-dark-blue/80 backdrop-blur-md border-b border-accent/20 rounded-t-xl shadow-lg p-2 pointer-events-auto">
             <div className="flex flex-col md:flex-row items-center justify-between">
               {/* タイトル部分 - スクロールに応じてサイズ変更 */}
               <h2 
@@ -132,21 +132,29 @@ export default function BusinessMenuBar() {
                 事業への想い
               </h2>
               
-              {/* メニュー項目 */}
-              <div className="flex items-center space-x-2 md:space-x-4">
-                {businessItems.map((item) => (
+              {/* メニュー項目 - 元のデザインに近いフラットなスタイル */}
+              <div className="flex items-center justify-center w-full md:w-auto space-x-0">
+                {businessItems.map((item, index) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`
-                      px-3 py-2 rounded-lg transition-all duration-300 flex items-center
+                      py-3 px-4 md:px-8 transition-all duration-300 relative
+                      ${index === 0 ? 'rounded-l-lg' : ''}
+                      ${index === businessItems.length - 1 ? 'rounded-r-lg' : ''}
                       ${activeItem === item.id
-                        ? 'bg-accent text-white shadow-md shadow-accent/20'
-                        : 'bg-dark-blue/50 text-white/80 hover:bg-accent/30 hover:text-white'}
+                        ? 'bg-dark-blue/50 text-accent'
+                        : 'bg-transparent text-white/70 hover:text-white hover:bg-dark-blue/30'}
                     `}
                   >
-                    <span className="mr-2">{item.icon}</span>
-                    <span className="hidden md:inline">{item.title}</span>
+                    <div className="flex flex-col md:flex-row items-center justify-center">
+                      <span className="text-xl md:text-base md:mr-2">{item.icon}</span>
+                      <span className="text-sm md:text-base">{item.title}</span>
+                    </div>
+                    {/* アクティブな項目の下線 */}
+                    {activeItem === item.id && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"></div>
+                    )}
                   </button>
                 ))}
               </div>

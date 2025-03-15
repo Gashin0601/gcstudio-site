@@ -40,9 +40,20 @@ const NavLink = memo(({
   homeHash?: string;
 }) => {
   const pathname = usePathname();
-  // アクティブ状態の判定を改善: ホームの場合は特別に判定
+  // アクティブ状態の判定を改善
   const isHome = pathname === '/';
-  const isActive = href === '/' ? isHome : pathname === href;
+  
+  // アクティブ状態の計算ロジックを改善
+  let isActive = false;
+  
+  // '/' に特殊処理: トップページにいる場合のみホームをアクティブに
+  if (href === '/') {
+    isActive = isHome;
+  } 
+  // その他のページの場合は通常のパス比較
+  else {
+    isActive = pathname === href;
+  }
   
   // リンク先の決定（ホームページの場合はハッシュリンクを使用）
   const linkHref = isHome && homeHash ? homeHash : href;

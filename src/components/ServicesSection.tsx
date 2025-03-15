@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import BusinessMenuBar from './BusinessMenuBar';
 
 // 各事業カテゴリを定義
 const services = [
@@ -39,7 +40,7 @@ const services = [
     id: 'app-development',
     title: 'アプリ開発',
     description: '視覚障害者支援を中心としたアプリケーション開発。使いやすさと機能性を兼ね備えたソリューションで、日常生活における障壁を取り除きます。',
-    image: '/images/hero-bg.jpeg',
+    image: '/images/placeholder.jpg',
     color: 'neon-green',
     hasChildren: true,
     children: [
@@ -79,7 +80,11 @@ export default function ServicesSection() {
   const [imageError, setImageError] = useState<Record<string, boolean>>({});
   const [expandedApp, setExpandedApp] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: false
+  });
+
   // 色クラスの取得
   const getColorClass = (color: string) => {
     switch(color) {
@@ -140,9 +145,12 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" className="relative overflow-hidden bg-dark-bg">
-      {/* ヘッダー部分 - 固定表示 */}
-      <div className="sticky top-0 z-30 py-10 bg-gradient-to-b from-dark-bg via-dark-bg to-transparent">
+    <section id="services" className="relative overflow-hidden bg-dark-bg" ref={ref}>
+      {/* BusinessMenuBarコンポーネントを追加 */}
+      <BusinessMenuBar />
+      
+      {/* ヘッダー部分 - 最初のみ表示、BusinessMenuBarに置き換え */}
+      <div className="py-10">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -154,29 +162,12 @@ export default function ServicesSection() {
             事業への想い
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-accent to-accent/30 mx-auto rounded-full"></div>
-          
-          {/* ナビゲーション */}
-          <div className="mt-8 flex justify-center space-x-6">
-            {services.map((service) => (
-              <a
-                key={service.id}
-                href={`#${service.id}`}
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
-                  activeSection === service.id
-                    ? `bg-gradient-to-r ${getBgColorClass(service.color)} text-white`
-                    : 'text-text-secondary hover:text-white'
-                }`}
-              >
-                {service.title}
-              </a>
-            ))}
-          </div>
         </motion.div>
       </div>
-      
+        
       {/* 各事業セクション - 縦に並ぶ */}
       <div className="mt-16">
-        {services.map((service, index) => (
+          {services.map((service, index) => (
           <div 
             key={service.id}
             id={service.id}
@@ -191,30 +182,30 @@ export default function ServicesSection() {
             <div className="container mx-auto px-4">
               <div className={`grid grid-cols-1 ${service.hasChildren ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-12 items-center`}>
                 {/* 画像セクション */}
-                <motion.div 
+            <motion.div 
                   className="relative"
                   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.2 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                >
+              viewport={{ once: true, margin: "-100px" }}
+            >
                   <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                    {!imageError[service.id] ? (
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        fill
-                        className="object-cover"
-                        onError={() => setImageError(prev => ({ ...prev, [service.id]: true }))}
-                      />
-                    ) : (
+                {!imageError[service.id] ? (
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    onError={() => setImageError(prev => ({ ...prev, [service.id]: true }))}
+                  />
+                ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-dark-blue/50 text-white/70 text-2xl">
-                        {service.title}
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+                    {service.title}
                   </div>
-                  
+                )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+              </div>
+              
                   {/* 装飾エフェクト */}
                   <div className="absolute -bottom-5 -right-5 w-32 h-32 rounded-full blur-3xl bg-accent/20 -z-10"></div>
                   <div className="absolute -top-5 -left-5 w-24 h-24 rounded-full blur-3xl bg-accent/10 -z-10"></div>
@@ -230,9 +221,9 @@ export default function ServicesSection() {
                 >
                   <div className="relative z-10">
                     <h3 className={`text-4xl font-serif font-bold mb-6 tracking-wide ${getColorClass(service.color)}`}>
-                      {service.title}
+                  {service.title}
                       <div className="w-24 h-1 bg-gradient-to-r from-accent to-transparent mt-3"></div>
-                    </h3>
+                </h3>
                     <p className="text-xl text-white/90 mb-8 leading-relaxed">
                       {service.longDescription || service.description}
                     </p>
@@ -260,14 +251,14 @@ export default function ServicesSection() {
                     )}
                     
                     {!service.hasChildren && (
-                      <motion.div 
+                <motion.div 
                         className="mt-8"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        viewport={{ once: true }}
-                      >
-                        <a 
+                  viewport={{ once: true }}
+                >
+                  <a 
                           href={`/services/${service.id}`} 
                           className={`inline-flex items-center px-6 py-3 rounded-lg border border-accent/30 
                             bg-gradient-to-r ${getBgColorClass(service.color)} backdrop-blur-sm 
@@ -407,12 +398,12 @@ export default function ServicesSection() {
                                             className={`inline-flex items-center px-4 py-2 rounded-lg border ${
                                               app.id === 'visionsim-app' ? 'border-neon-green/30 bg-neon-green/10 hover:bg-neon-green/20' : 'border-neon-pink/30 bg-neon-pink/10 hover:bg-neon-pink/20'
                                             } transition-all duration-300`}
-                                          >
-                                            詳細を見る
-                                            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                            </svg>
-                                          </a>
+                  >
+                    詳細を見る
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </a>
                                         </div>
                                       </div>
                                     </div>
@@ -440,10 +431,10 @@ export default function ServicesSection() {
                 <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
-              </motion.div>
+            </motion.div>
             )}
           </div>
-        ))}
+          ))}
       </div>
     </section>
   );

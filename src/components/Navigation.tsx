@@ -380,8 +380,14 @@ function Navigation() {
     <header 
       className={`
         fixed top-0 w-full z-[50] transition-all duration-300
-        ${scrolled || isOpen ? 'bg-dark-blue/90 backdrop-blur-md shadow-lg' : 'bg-transparent'}
+        ${scrolled || isOpen 
+          ? 'backdrop-blur-lg shadow-lg' 
+          : 'bg-transparent'}
       `}
+      style={{
+        backgroundColor: scrolled || isOpen ? 'rgba(0, 2, 8, 0.85)' : 'transparent',
+        boxShadow: scrolled || isOpen ? '0 4px 30px rgba(0, 0, 0, 0.15)' : 'none'
+      }}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* ロゴ部分 */}
@@ -394,7 +400,7 @@ function Navigation() {
               height={40}
               className="rounded-full"
             />
-            <span className="text-white">GC Studio</span>
+            <span className="text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">GC Studio</span>
           </div>
         ) : (
           <Link 
@@ -409,7 +415,7 @@ function Navigation() {
               height={40}
               className="rounded-full"
             />
-            <span className="text-white hover:text-accent transition-colors duration-300">GC Studio</span>
+            <span className="text-white hover:text-accent transition-colors duration-300 drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">GC Studio</span>
           </Link>
         )}
 
@@ -417,7 +423,7 @@ function Navigation() {
         <nav className="hidden md:block" aria-label="メインナビゲーション">
           <ul className="flex space-x-8">
             {navItems.map((item) => (
-              <li key={item.name}>
+              <li key={item.name} className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
                 <NavLink href={item.href}>{item.name}</NavLink>
               </li>
             ))}

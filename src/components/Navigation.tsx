@@ -29,7 +29,8 @@ const NavLink = memo(({
   isMobile = false,
   icon = null,
   menuStyle = MENU_STYLES.FULLSCREEN,
-  homeHash
+  homeHash,
+  ...props
 }: { 
   href: string; 
   children: React.ReactNode; 
@@ -38,38 +39,69 @@ const NavLink = memo(({
   icon?: React.ReactNode | null;
   menuStyle?: string;
   homeHash?: string;
+  [key: string]: any;
 }) => {
   const pathname = usePathname();
-  const isHome = pathname === '/';
+  const [currentHash, setCurrentHash] = useState('');
+  const isHomePage = pathname === '/';
   
-  // デバッグ用: 現在のパス情報とリンク情報を表示
+  // クライアントサイドでのみwindow.locationにアクセス
   useEffect(() => {
-    if (href === '/' || href === '/profile') {  // ホームとプロフィールリンクだけデバッグ
-      console.log(`リンク情報: ${href}, 現在のパス: ${pathname}, isHome: ${isHome}`);
-    }
-  }, [href, pathname, isHome]);
+    // 初期ハッシュを設定
+    setCurrentHash(window.location.hash);
+    
+    // ハッシュの変更を検知する関数
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    
+    // スクロールイベントでもハッシュをチェック（SPAでの遷移対応）
+    const handleScroll = () => {
+      if (window.location.hash !== currentHash) {
+        setCurrentHash(window.location.hash);
+      }
+    };
+    
+    // イベントリスナーを登録
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('scroll', handleScroll);
+    
+    // クリーンアップ関数
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentHash]);
   
-  // 明示的なアクティブ状態の判定
-  let isActive = false;
+  // アクティブ状態を計算する関数
+  const getIsActive = () => {
+    // ホームページの場合
+    if (isHomePage) {
+      // ホームページでは、スクロール検出によるアクティブ状態のみを使用
+      // スクロールアクティブが設定されている場合はそれを使用
+      if (props['data-scroll-active']) {
+        return true;
+      }
+      
+      // スクロールアクティブが設定されていない場合は非アクティブ
+      // これによりパスベースのハイライトとの干渉を防ぐ
+      return false;
+    } 
+    
+    // ホームページ以外では、パスベースの一致のみを使用
+    return pathname === href;
+  };
   
-  // 1. ホームページ（/）の場合
-  if (pathname === '/') {
-    // ホームページにいる場合は、ホームリンク（/）だけをアクティブに
-    isActive = href === '/';
-  } 
-  // 2. その他のページの場合
-  else {
-    // 正確なパス一致の場合のみアクティブに
-    isActive = pathname === href;
-  }
+  // 実際のアクティブ状態
+  const isActive = getIsActive();
   
-  // リンク先の決定（ホームページの場合はハッシュリンク、それ以外は通常のリンク）
-  const linkHref = isHome && homeHash ? homeHash : href;
+  // デバッグログ: 状態変化時に詳細情報を表示
+  useEffect(() => {
+    console.log(`リンク「${children}」: パス=${pathname}, href=${href}, homeHash=${homeHash || 'なし'}, 現在のハッシュ=${currentHash || 'なし'}, アクティブ=${isActive}, スクロールアクティブ=${props['data-scroll-active'] || false}`);
+  }, [pathname, href, homeHash, currentHash, isActive, children, props]);
   
-  // 強制的なデバッグ表示
-  if (href === '/' && !isMobile) {
-    console.log(`ホームリンク: isActive = ${isActive}, pathname = ${pathname}`);
-  }
+  // リンク先決定: ホームページでのみハッシュリンク使用
+  const linkHref = pathname === '/' && homeHash ? homeHash : href;
   
   // フルスクリーンメニュースタイル
   if (menuStyle === MENU_STYLES.FULLSCREEN && isMobile) {
@@ -188,9 +220,10 @@ MenuButton.displayName = 'MenuButton';
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [menuStyle, setMenuStyle] = useState(MENU_STYLES.FULLSCREEN); // デフォルトのメニュースタイルをフルスクリーンに変更
+  const [menuStyle, setMenuStyle] = useState(MENU_STYLES.FULLSCREEN);
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const [activeSection, setActiveSection] = useState('');
 
   // メニュー開閉のハンドラー
   const toggleMenu = useCallback(() => {
@@ -202,17 +235,54 @@ function Navigation() {
     setIsOpen(false);
   }, []);
 
-  // スクロールイベントのハンドラー
+  // スクロールイベントのハンドラーとセクション検出
   useEffect(() => {
+    if (!isHome) return; // ホームページでのみ有効
+
     const handleScroll = () => {
+      // ヘッダーの背景透過度の設定
       setScrolled(window.scrollY > 20);
+      
+      // 各セクションの位置を取得して現在のアクティブセクションを決定
+      const sections = [
+        { id: 'top', hash: '#top' },
+        { id: 'profile', hash: '#profile' },
+        { id: 'services', hash: '#services' },
+        { id: 'news', hash: '#news' },
+        { id: 'vision', hash: '#vision' },
+        { id: 'contact', hash: '#contact' }
+      ];
+      
+      // ビューポートの中央位置
+      const viewportMiddle = window.innerHeight / 2;
+      
+      // 各セクションをチェックして、現在表示されているセクションを特定
+      for (const section of sections) {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // セクションがビューポートの中央付近に表示されているかチェック
+          if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
+            if (activeSection !== section.hash) {
+              setActiveSection(section.hash);
+              console.log(`アクティブセクション変更: ${section.hash}`);
+            }
+            break;
+          }
+        }
+      }
+      
+      // トップに戻った場合
+      if (window.scrollY < 100 && activeSection !== '#top') {
+        setActiveSection('#top');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // 初期状態を設定
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome, activeSection]);
 
   // メニュー開閉時のbodyスクロール制御
   useEffect(() => {
@@ -316,6 +386,7 @@ function Navigation() {
                 icon={item.icon}
                 menuStyle={MENU_STYLES.FULLSCREEN}
                 homeHash={item.homeHash}
+                data-scroll-active={isHome && item.homeHash === activeSection}
               >
                 {item.name}
               </NavLink>
@@ -403,6 +474,7 @@ function Navigation() {
                   icon={item.icon}
                   menuStyle={MENU_STYLES.DRAWER}
                   homeHash={item.homeHash}
+                  data-scroll-active={isHome && item.homeHash === activeSection}
                 >
                   {item.name}
                 </NavLink>
@@ -462,7 +534,14 @@ function Navigation() {
           <ul className="flex space-x-8">
             {navItems.map((item) => (
               <li key={item.name} className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
-                <NavLink href={item.href} homeHash={item.homeHash}>{item.name}</NavLink>
+                <NavLink 
+                  href={item.href} 
+                  homeHash={item.homeHash}
+                  // スクロール検出によるアクティブ状態の上書き
+                  data-scroll-active={isHome && item.homeHash === activeSection}
+                >
+                  {item.name}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -479,6 +558,6 @@ function Navigation() {
       }
     </header>
   );
-}
+} 
 
 export default memo(Navigation); 

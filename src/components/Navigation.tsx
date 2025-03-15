@@ -40,23 +40,36 @@ const NavLink = memo(({
   homeHash?: string;
 }) => {
   const pathname = usePathname();
-  // アクティブ状態の判定を改善
   const isHome = pathname === '/';
   
-  // アクティブ状態の計算ロジックを改善
+  // デバッグ用: 現在のパス情報とリンク情報を表示
+  useEffect(() => {
+    if (href === '/' || href === '/profile') {  // ホームとプロフィールリンクだけデバッグ
+      console.log(`リンク情報: ${href}, 現在のパス: ${pathname}, isHome: ${isHome}`);
+    }
+  }, [href, pathname, isHome]);
+  
+  // 明示的なアクティブ状態の判定
   let isActive = false;
   
-  // '/' に特殊処理: トップページにいる場合のみホームをアクティブに
-  if (href === '/') {
-    isActive = isHome;
+  // 1. ホームページ（/）の場合
+  if (pathname === '/') {
+    // ホームページにいる場合は、ホームリンク（/）だけをアクティブに
+    isActive = href === '/';
   } 
-  // その他のページの場合は通常のパス比較
+  // 2. その他のページの場合
   else {
+    // 正確なパス一致の場合のみアクティブに
     isActive = pathname === href;
   }
   
-  // リンク先の決定（ホームページの場合はハッシュリンクを使用）
+  // リンク先の決定（ホームページの場合はハッシュリンク、それ以外は通常のリンク）
   const linkHref = isHome && homeHash ? homeHash : href;
+  
+  // 強制的なデバッグ表示
+  if (href === '/' && !isMobile) {
+    console.log(`ホームリンク: isActive = ${isActive}, pathname = ${pathname}`);
+  }
   
   // フルスクリーンメニュースタイル
   if (menuStyle === MENU_STYLES.FULLSCREEN && isMobile) {
@@ -115,6 +128,10 @@ const NavLink = memo(({
       `}
       onClick={onClick}
       aria-current={isActive ? 'page' : undefined}
+      // データ属性を追加してデバッグしやすくする
+      data-active={isActive}
+      data-current-path={pathname}
+      data-link-href={href}
     >
       {children}
       <span 
